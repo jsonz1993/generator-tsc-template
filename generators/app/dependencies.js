@@ -4,12 +4,14 @@ module.exports = {
 		'prettier',
 		'ts-node',
 		'tsup',
+
 		'typescript',
 		'@commitlint/cli',
 		'@commitlint/config-conventional',
 		'cz-conventional-changelog',
 		'lint-staged',
 		'simple-git-hooks',
+		'commitizen',
 
 		'@types/jest',
 		'@types/node',

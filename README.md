@@ -1,4 +1,4 @@
-# generator-tsc-template [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# generator-tsc-template [![NPM version][npm-image]][npm-url]
 > tsc builder template: with git hooks、prettier、editor、eslint、babel and so on
 
 ## Installation

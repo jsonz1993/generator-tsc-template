@@ -25,6 +25,7 @@ module.exports = defineConfig({
         tryExtensions: ['.ts', '.js', '.jsx', '.tsx', '.d.ts']
       }
     ],
+    "@typescript-eslint/no-explicit-any": "off",
     'node/no-missing-require': [
       'error',
       {

@@ -1,5 +1,4 @@
-function Hello(str: string) {
-  console.log(`Hello ${str}`);
+export function hello(str: string): string {
+  console.log(`Hello ${str}`)
+  return str
 }
-
-Hello('Jsonz')

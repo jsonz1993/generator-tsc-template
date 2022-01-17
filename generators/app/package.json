@@ -1,0 +1,32 @@
+{
+  "version":"0.1.0",
+  "description":"",
+  "main":"dist/index.js",
+  "scripts":{
+     "lint":"eslint --cache --fix --ext .ts,.js src",
+     "dev":"npm run build -- --watch",
+     "build":"tsup src/index.ts --format cjs,esm --dts",
+     "test":"jest",
+     "commit":"cz",
+     "format":"prettier --write ."
+  },
+  "keywords":[
+
+  ],
+  "license":"ISC",
+  "lint-staged":{
+     "*":[
+        "prettier --write --ignore-unknown"
+     ],
+     "*.{js,ts}": ["eslint --cache"]
+  },
+  "simple-git-hooks":{
+     "pre-commit":"npx lint-staged",
+     "commit-msg":"npx --no -- commitlint --edit"
+  },
+  "config":{
+     "commitizen":{
+        "path":"cz-conventional-changelog"
+     }
+  }
+}

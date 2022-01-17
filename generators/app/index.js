@@ -3,6 +3,8 @@ const Generator = require('yeoman-generator');
 const _ = require('lodash');
 const chalk = require('chalk');
 const yosay = require('yosay');
+const deps = require('./dependencies');
+const pkg = require('./package.json');
 
 _.extend(Generator.prototype, require('yeoman-generator/lib/actions/install'));
 
@@ -39,60 +41,23 @@ module.exports = class extends Generator {
 			),
 		);
 
-		this.answers = await this.prompt(options);
+		// 如果传了name,直接跳过询问阶段
+		const answersOptions = options.filter(item => !this.options[item.name]);
+		this.answers = await this.prompt(answersOptions) || {};
+
+		this.props = _.merge({}, this.answers, this.options);
 	}
 
 	async writing() {
-		const {name} = this.answers;
+		const {name} = this.props;
 		this.destinationRoot(this.destinationPath(name));
 
-		const devDependencies = await this.addDevDependencies([
-			'@babel/cli',
-			'@babel/core',
-			'@babel/preset-env',
-			'@babel/preset-typescript',
-			'jest',
-			'prettier',
-			'eslint',
-			'ts-node',
-			'tsup',
-			'typescript',
-			'@commitlint/cli',
-			'@commitlint/config-conventional',
-			'cz-conventional-changelog',
-			'lint-staged',
-			'simple-git-hooks',
-		]);
+		// 想默认最新版本，所以不写在packageJson
+		const devDependencies = await this.addDevDependencies(deps.devDeps);
 
 		this.packageJson.merge({
+			...pkg,
 			name,
-			version: '0.1.0',
-			description: '',
-			main: 'dist/index.js',
-			scripts: {
-				dev: 'npm run build -- --watch',
-				build: 'tsup src/index.ts --format cjs,esm --dts',
-				test: 'jest',
-				commit: 'cz',
-				format: 'prettier --write .',
-			},
-			keywords: [],
-			license: 'ISC',
-			'lint-staged': {
-				'*': [
-					'prettier --write --ignore-unknown',
-				],
-				'*.{js,ts}': ['eslint --cache'],
-			},
-			'simple-git-hooks': {
-				'pre-commit': 'npx lint-staged',
-				'commit-msg': 'npx --no -- commitlint --edit',
-			},
-			config: {
-				commitizen: {
-					path: 'cz-conventional-changelog',
-				},
-			},
 			devDependencies,
 		});
 
@@ -105,7 +70,14 @@ module.exports = class extends Generator {
 	}
 
 	end() {
+		this.log(chalk.blue('init git'));
 		this.spawnCommandSync('git', ['init']);
+
+		this.log(chalk.blue('init simple-git-hooks'));
+		this.spawnCommandSync('git', ['config', 'core.hooksPath', '.git/hooks/']);
+		this.spawnCommandSync('rm', ['-rf', '.git/hooks']);
 		this.spawnCommandSync('npx', ['simple-git-hooks']);
+
+		this.log(chalk.green('enjoy work!'));
 	}
 };

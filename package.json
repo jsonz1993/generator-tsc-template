@@ -1,6 +1,6 @@
 {
   "name": "generator-tsc-template",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "tsc builder template: with git hooks、prettier、editor、eslint、babel and so on",
   "homepage": "https://github.com/jsonz1993/generator-tsc-template",
   "author": {

@@ -9,6 +9,7 @@
     "url": "https://github.com/jsonz1993"
   },
   "scripts": {
+    "lint": "eslint --ext .ts,.js --fix .",
     "major": "npm version major",
     "minor": "npm version minor",
     "patch": "npm version patch"
@@ -23,11 +24,14 @@
     "yeoman-generator"
   ],
   "devDependencies": {
+    "@jsonz/eslint-config": "^0.2.2",
+    "@jsonz/eslint-config-basic": "^0.2.0",
     "@types/jest": "^27.4.0",
     "eslint": "^8.7.0",
     "eslint-config-xo": "^0.39.0",
     "lint-staged": "^9.4.3",
     "prettier": "^1.19.1",
+    "typescript": "^4.5.4",
     "yeoman-assert": "^3.1.1",
     "yeoman-test": "^1.7.0"
   },

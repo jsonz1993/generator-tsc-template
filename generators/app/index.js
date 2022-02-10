@@ -53,13 +53,11 @@ module.exports = class extends Generator {
     this.destinationRoot(this.destinationPath(name))
 
     // 想默认最新版本，所以不写在packageJson
-    const devDependencies = await this.addDevDependencies(deps.devDeps)
-
     this.packageJson.merge({
       ...pkg,
-      name,
-      devDependencies
+      name
     })
+    await this.addDevDependencies(deps.devDeps)
 
     this.fs.copy(this.templatePath(), this.destinationPath())
     this.fs.copy(this.templatePath('.*'), this.destinationPath())

@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint --cache --fix --ext .ts,.js src",
     "dev": "npm run build -- --watch",
-    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "build": "rimraf ./dist && tsup src/index.ts --format cjs,esm --dts",
     "test": "jest",
     "commit": "cz",
     "format": "prettier --write .",
@@ -15,6 +15,9 @@
     "minor": "npm version minor",
     "patch": "npm version patch"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [],
   "license": "ISC",
   "lint-staged": {

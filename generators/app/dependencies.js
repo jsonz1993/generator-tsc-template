@@ -4,6 +4,7 @@ module.exports = {
     'prettier',
     'ts-node',
     'tsup',
+    'rimraf',
 
     'typescript',
     '@commitlint/cli',

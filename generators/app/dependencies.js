@@ -13,6 +13,7 @@ module.exports = {
     'commitizen',
     'lint-staged',
     'simple-git-hooks',
+    'standard-version',
 
     '@types/jest',
     '@types/node',

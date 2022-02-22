@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -11,9 +11,10 @@
     "test": "jest",
     "commit": "cz",
     "format": "prettier --write .",
-    "major": "npm version major",
-    "minor": "npm version minor",
-    "patch": "npm version patch"
+    "release": "standard-version",
+    "major": "standard-version --release-as major",
+    "minor": "standard-version --release-as minor",
+    "patch": "standard-version --release-as patch"
   },
   "files": [
     "dist"

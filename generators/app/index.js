@@ -61,6 +61,10 @@ module.exports = class extends Generator {
 
     this.fs.copy(this.templatePath(), this.destinationPath())
     this.fs.copy(this.templatePath('.*'), this.destinationPath())
+    this.fs.move(
+      this.destinationPath('_gitignore'),
+      this.destinationPath('.gitignore')
+    )
   }
 
   install() {

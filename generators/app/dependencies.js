@@ -24,6 +24,7 @@ module.exports = {
     '@babel/preset-typescript',
 
     'eslint',
+    'eslint-plugin-jest',
     '@jsonz/eslint-config'
   ]
 }

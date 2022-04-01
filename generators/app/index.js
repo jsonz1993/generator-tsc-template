@@ -54,8 +54,8 @@ module.exports = class extends Generator {
 
     // 想默认最新版本，所以不写在packageJson
     this.packageJson.merge({
-      ...pkg,
-      name
+      name,
+      ...pkg
     })
     await this.addDevDependencies(deps.devDeps)
 

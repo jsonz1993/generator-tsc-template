@@ -1,4 +1,5 @@
 'use strict'
+const fs = require('fs')
 const Generator = require('yeoman-generator')
 const _ = require('lodash')
 const chalk = require('chalk')
@@ -72,6 +73,8 @@ module.exports = class extends Generator {
   }
 
   end() {
+    const { name } = this.props
+    fs.appendFileSync(this.destinationPath('README.md'), `# ${name}`)
     this.log(chalk.blue('init git'))
     this.spawnCommandSync('git', ['init'])
 

@@ -21,14 +21,6 @@
   ],
   "keywords": [],
   "license": "ISC",
-  "lint-staged": {
-    "*": [
-      "prettier --write --ignore-unknown"
-    ],
-    "*.{js,ts}": [
-      "eslint --cache"
-    ]
-  },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged",
     "commit-msg": "npx --no -- commitlint --edit"

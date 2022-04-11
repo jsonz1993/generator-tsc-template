@@ -1,4 +1,17 @@
 const fs = require('fs');
+const { ESLint } = require('eslint')
+
+const removeIgnoredFiles = async (files) => {
+  const eslint = new ESLint()
+  const isIgnored = await Promise.all(
+    files.map((file) => {
+      return eslint.isPathIgnored(file)
+    })
+  )
+  const filteredFiles = files.filter((_, i) => !isIgnored[i])
+  return filteredFiles.join(' ')
+}
+
 const generateTSConfig = stagedFilenames => {
   const tsconfig = JSON.parse(fs.readFileSync('tsconfig.json', 'utf8'));
   tsconfig.include = stagedFilenames;
@@ -9,10 +22,13 @@ module.exports = {
   "*": [
     "prettier --write --ignore-unknown"
   ],
-  "*.{js,ts}": [
-    "eslint --cache"
-  ],
   "*.ts": [
     generateTSConfig,
+  ],
+  "*.{js,ts}": [
+    async (files) => {
+      const filesToLint = await removeIgnoredFiles(files)
+      return `eslint 0 --cache ${filesToLint}`
+    }
   ],
 }

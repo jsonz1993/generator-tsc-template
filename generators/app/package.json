@@ -23,7 +23,8 @@
   "license": "ISC",
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged",
-    "commit-msg": "npx --no -- commitlint --edit"
+    "commit-msg": "npx --no -- commitlint --edit",
+    "post-merge": "sh scripts/post-merge.sh"
   },
   "config": {
     "commitizen": {

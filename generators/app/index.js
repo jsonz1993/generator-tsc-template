@@ -49,6 +49,10 @@ module.exports = class extends Generator {
     this.props = _.merge({}, this.answers, this.options)
   }
 
+  async conflicts() {
+    await this.addDevDependencies(deps.devDeps)
+  }
+
   async writing() {
     const { name } = this.props
     this.destinationRoot(this.destinationPath(name))
@@ -58,7 +62,6 @@ module.exports = class extends Generator {
       name,
       ...pkg
     })
-    await this.addDevDependencies(deps.devDeps)
 
     this.fs.copy(this.templatePath(), this.destinationPath())
     this.fs.copy(this.templatePath('.*'), this.destinationPath())
@@ -66,22 +69,26 @@ module.exports = class extends Generator {
       this.destinationPath('_gitignore'),
       this.destinationPath('.gitignore')
     )
+
+    fs.appendFileSync(this.destinationPath('README.md'), `# ${name}`)
   }
 
   install() {
-    this.npmInstall()
+    this.spawnCommandSync('npm', ['install'])
   }
 
-  end() {
-    const { name } = this.props
-    fs.appendFileSync(this.destinationPath('README.md'), `# ${name}`)
-    this.log(chalk.blue('init git'))
-    this.spawnCommandSync('git', ['init'])
-
+  _initGitHooks() {
     this.log(chalk.blue('init simple-git-hooks'))
     this.spawnCommandSync('git', ['config', 'core.hooksPath', '.git/hooks/'])
     this.spawnCommandSync('rm', ['-rf', '.git/hooks'])
     this.spawnCommandSync('npx', ['simple-git-hooks'])
+  }
+
+  end() {
+    this.log(chalk.blue('init git'))
+    this.spawnCommandSync('git', ['init'])
+
+    this._initGitHooks()
 
     this.log(chalk.green('enjoy work!'))
   }

@@ -69,8 +69,6 @@ module.exports = class extends Generator {
       this.destinationPath('_gitignore'),
       this.destinationPath('.gitignore')
     )
-
-    fs.appendFileSync(this.destinationPath('README.md'), `# ${name}`)
   }
 
   install() {
@@ -85,6 +83,8 @@ module.exports = class extends Generator {
   }
 
   end() {
+    const { name } = this.props
+    fs.appendFileSync(this.destinationPath('README.md'), `# ${name}`)
     this.log(chalk.blue('init git'))
     this.spawnCommandSync('git', ['init'])
 

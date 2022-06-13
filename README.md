@@ -14,6 +14,10 @@ Then generate your new project:
 
 ```bash
 yo tsc-template
+// or
+yo tsc-template projectName
+// or don't init git repo
+yo tsc-template projectName --git=false
 ```
 
 ## Getting To Know Yeoman

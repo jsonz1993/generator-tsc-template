@@ -15,6 +15,11 @@ const options = [
     name: 'name',
     message: 'Your project name',
     default: this.appname
+  }, {
+    type: 'confirm',
+    name: 'git',
+    message: 'Should init git?',
+    default: true
   }
 ]
 
@@ -43,10 +48,18 @@ module.exports = class extends Generator {
     )
 
     // 如果传了name,直接跳过询问阶段
-    const answersOptions = options.filter(item => !this.options[item.name])
+    const answersOptions = options.filter(item => {
+      switch (item.name) {
+        case 'name':
+          return !this.options.name
+        case 'git':
+          return typeof this.options.git !== 'string'
+      }
+      return true
+    })
     this.answers = await this.prompt(answersOptions) || {}
 
-    this.props = _.merge({}, this.answers, this.options)
+    this.props = _.merge({}, this.options, this.answers)
   }
 
   async conflicts() {
@@ -83,12 +96,21 @@ module.exports = class extends Generator {
   }
 
   end() {
-    const { name } = this.props
+    const { name, git } = this.props
+    // git=== 'false' || 'true' || true || false
     fs.appendFileSync(this.destinationPath('README.md'), `# ${name}`)
-    this.log(chalk.blue('init git'))
-    this.spawnCommandSync('git', ['init'])
+    const shouldInitGIt = git === 'true' || git === true
+    if (shouldInitGIt) {
+      this.log(chalk.blue('init git'))
+      this.spawnCommandSync('git', ['init'])
+      this._initGitHooks()
+    } else {
+      this.log(chalk.cyan(`
+cd ${name}
+git init && git config core.hooksPath .git/hooks/ && npx simple-git-hooks
+`))
+    }
 
-    this._initGitHooks()
 
     this.log(chalk.green('enjoy work!'))
   }

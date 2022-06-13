@@ -12,7 +12,7 @@
         "<node_internals>/**"
       ],
       "program": "${workspaceFolder}/node_modules/.bin/yo",
-      "args": ["tsc-template"],
+      "args": ["tsc-template", "test1", "--git=false"],
       "console": "integratedTerminal"
     }
   ]

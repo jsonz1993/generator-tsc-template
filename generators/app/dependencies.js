@@ -6,23 +6,22 @@ module.exports = {
     'tsup',
     '@swc/core',
     'rimraf',
-
     'typescript',
+    'standard-version',
+    '@babel/cli',
+    '@babel/core',
+    '@babel/preset-env',
+    '@babel/preset-typescript',
+
     '@commitlint/cli',
     '@commitlint/config-conventional',
     'cz-conventional-changelog',
     'commitizen',
     'lint-staged',
     'simple-git-hooks',
-    'standard-version',
 
     '@types/jest',
     '@types/node',
-
-    '@babel/cli',
-    '@babel/core',
-    '@babel/preset-env',
-    '@babel/preset-typescript',
 
     'eslint',
     'eslint-plugin-jest',

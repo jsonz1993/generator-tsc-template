@@ -111,7 +111,6 @@ git init && git config core.hooksPath .git/hooks/ && npx simple-git-hooks
 `))
     }
 
-
     this.log(chalk.green('enjoy work!'))
   }
 }

@@ -28,7 +28,7 @@ module.exports = {
   "*.{js,ts}": [
     async (files) => {
       const filesToLint = await removeIgnoredFiles(files)
-      return `eslint 0 --cache ${filesToLint}`
+      return `eslint --cache ${filesToLint}`
     }
   ],
 }

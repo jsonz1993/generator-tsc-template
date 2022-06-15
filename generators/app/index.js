@@ -89,10 +89,13 @@ module.exports = class extends Generator {
   }
 
   _initGitHooks() {
-    this.log(chalk.blue('init simple-git-hooks'))
+    // this.log(chalk.blue('init simple-git-hooks'))
     this.spawnCommandSync('git', ['config', 'core.hooksPath', '.git/hooks/'])
     this.spawnCommandSync('rm', ['-rf', '.git/hooks'])
-    this.spawnCommandSync('npx', ['simple-git-hooks'])
+    // this.spawnCommandSync('npx', ['simple-git-hooks'])
+    this.log(
+      `${chalk.yellow('run: ')} ${chalk.green('npx simple-git-hooks')}`
+    )
   }
 
   end() {

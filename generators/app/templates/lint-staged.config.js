@@ -38,7 +38,7 @@ const generateTSConfig = (stagedFilenames) => {
 }
 
 module.exports = {
-  '!*.(js,ts,tsx,jsx)': ['prettier --write --ignore-unknown'],
+  '!*.(ts|js|tsx|jsx)': ['prettier --write --ignore-unknown'],
   '*.ts': [generateTSConfig],
   '*.{js,ts}': [
     async (files) => {

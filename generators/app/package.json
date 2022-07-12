@@ -11,7 +11,7 @@
     "test": "jest",
     "commit": "cz",
     "format": "prettier --write .",
-    "check": "cross-env NODE_ENV=production tsc --noEmit && eslint --cache --ext .ts,.js src",
+    "check": "cross-env NODE_ENV=production tsc --noEmit && eslint --cache --ext .ts,.js src && npm run test",
     "release": "npm run test && standard-version",
     "major": "standard-version --release-as major",
     "minor": "standard-version --release-as minor",

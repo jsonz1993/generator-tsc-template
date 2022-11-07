@@ -103,6 +103,7 @@ module.exports = class extends Generator {
     if (shouldInitGIt) {
       this.log(chalk.blue('init git'))
       this.spawnCommandSync('git', ['init'])
+      this.spawnCommandSync('git', ['branch', '-m', 'master'])
       this._initGitHooks()
     } else {
       this.log(chalk.cyan(`

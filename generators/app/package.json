@@ -11,7 +11,8 @@
     "test": "jest",
     "commit": "cz",
     "format": "prettier --write .",
-    "release": "standard-version",
+    "check": "cross-env NODE_ENV=production tsc --noEmit && eslint --cache --ext .ts,.js src && npm run test",
+    "release": "npm run test && standard-version",
     "major": "standard-version --release-as major",
     "minor": "standard-version --release-as minor",
     "patch": "standard-version --release-as patch"
@@ -22,9 +23,10 @@
   "keywords": [],
   "license": "ISC",
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged",
+    "pre-commit": "npx lint-staged --allow-empty",
     "commit-msg": "npx --no -- commitlint --edit",
-    "post-merge": "sh scripts/post-merge.sh"
+    "post-merge": "node scripts/post-merge",
+    "pre-push": "npm run check"
   },
   "config": {
     "commitizen": {

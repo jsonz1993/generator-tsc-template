@@ -1,12 +1,13 @@
 module.exports = {
   devDeps: [
+    'cross-env',
     'jest',
     'prettier',
     'ts-node',
     'tsup',
     '@swc/core',
-    'rimraf',
     'typescript',
+    'rimraf',
     'standard-version',
     '@babel/cli',
     '@babel/core',
